@@ -5,6 +5,7 @@ import org.indivaragroup.house.floor.dto.CeramicDTO;
 import org.indivaragroup.Calculation.CalculationRegistrationidentity;
 import org.indivaragroup.house.floor.logic.CeramicLogic;
 import org.indivaragroup.student.grading.Logic.StudentGradingLogic;
+import org.indivaragroup.todoactivity.MainToDo;
 import org.indivaragroup.typedata.array.CalculationTypeDataArray;
 import org.indivaragroup.typedata.conversion.ConversionNumberdatatype;
 import org.indivaragroup.typedata.primitive.CalculationChardatatype;
@@ -61,6 +62,9 @@ public class Main {
         Movie.MoviePrint();
 
         //8.Todo Activity
+
+        MainToDo ToDoList = new MainToDo();
+        ToDoList.TodoMainApp(args);
 
 
 
