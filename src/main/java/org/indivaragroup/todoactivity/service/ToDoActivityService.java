@@ -8,12 +8,15 @@ import java.util.List;
 import java.util.ArrayList; // Wajib di-import agar dikenali Java
 
 public class ToDoActivityService {
+    //Repository Initialized
     private final ToDoActivityRepository repository;
+    //Assigning Max Weekly WorkLoad
     private static final double MAX_WEEKLY_CAPACITY = 50.0;
 
     public ToDoActivityService(ToDoActivityRepository repository) {
         this.repository = repository;
     }
+
 
     public boolean createTask(ToDoActivityDTO dto) {
         double currentWorkload = calculateAssigneeWorkload(dto.assignee);
@@ -33,12 +36,13 @@ public class ToDoActivityService {
 
         String currentStatus = task.getStatus();
 
+        //IF COndition When Canceled on Done State
         if (newStatus.equalsIgnoreCase("Cancelled")) {
             if (currentStatus.equalsIgnoreCase("Done")) return "CANNOT_CANCEL_DONE_TASK";
             task.setStatus("Cancelled");
             return "SUCCESS";
         }
-
+        //Make Sure Step After Open Is On Progress
         if (currentStatus.equalsIgnoreCase("Open")) {
             if (newStatus.equalsIgnoreCase("In Progress")) {
                 task.setStatus("In Progress");
@@ -47,6 +51,7 @@ public class ToDoActivityService {
             return "INVALID_TRANSITION_FROM_OPEN (Harus ke In Progress)";
         }
 
+        //Make Sure Status After In Progress is Ready Review
         if (currentStatus.equalsIgnoreCase("In Progress")) {
             if (newStatus.equalsIgnoreCase("Ready Review")) {
                 task.setStatus("Ready Review");
@@ -55,6 +60,7 @@ public class ToDoActivityService {
             return "INVALID_TRANSITION_FROM_IN_PROGRESS (Harus ke Ready Review)";
         }
 
+        //Make Done Status Have Boundaries To be True
         if (currentStatus.equalsIgnoreCase("Ready Review")) {
             if (newStatus.equalsIgnoreCase("Done")) {
                 if (!actorRole.equalsIgnoreCase("PM")) return "ONLY_PM_CAN_DONE";

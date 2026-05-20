@@ -18,7 +18,7 @@ public class ToDoActivityLogic {
     private int totalSubtasks;
     private int completedSubtasks;
 
-    // Status Birokrasi
+    // Status Case
     private String status;
     private boolean approvedByReviewer;
     private boolean submittedByTeamLead;
@@ -44,7 +44,7 @@ public class ToDoActivityLogic {
         this.actualHour = 0.0;
     }
 
-    // --- GETTER SETTER WAJIB ---
+    // GETTER SETTER
     public String getId() { return id; }
     public String getProject() { return project; }
     public String getTitle() { return title; }
@@ -70,7 +70,7 @@ public class ToDoActivityLogic {
     public boolean isSubmittedByTeamLead() { return submittedByTeamLead; }
     public void setSubmittedByTeamLead(boolean submitted) { this.submittedByTeamLead = submitted; }
 
-    // --- LOGIC METHOD ---
+
     public double getProgressPercentage() {
         if (this.status.equalsIgnoreCase("Done")) return 100.0;
         if (this.status.equalsIgnoreCase("Cancelled")) return 0.0;
@@ -83,7 +83,7 @@ public class ToDoActivityLogic {
             else if (this.status.equalsIgnoreCase("Ready Review")) baseProgress = 80.0;
         }
 
-        // Kunci progress agar tidak menyentuh 100% jika belum di-Done oleh PM
+        //Lock The Progress Until Finished
         if (baseProgress >= 100.0) {
             return 80.0;
         }

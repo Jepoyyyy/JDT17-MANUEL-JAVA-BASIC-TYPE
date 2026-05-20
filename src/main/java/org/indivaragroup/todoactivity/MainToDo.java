@@ -14,15 +14,17 @@ import java.util.ArrayList;
 
 public class MainToDo {
     public static void TodoMainApp(String[] args) {
+        //Initialized
         ToDoActivityRepository repository = new ToDoActivityRepository();
         ToDoActivityService service = new ToDoActivityService(repository);
         Scanner scanner = new Scanner(System.in);
 
-        // Data Dummy (Sudah disesuaikan ada 2 Project berbeda)
+        //Dummy Data
         service.createTask(new ToDoActivityDTO("T1", "Project A", "Backend API", "Buat API", "Budi", "High", 8, 40, "Alice", LocalDate.now().plusDays(5), 0, 0));
         service.createTask(new ToDoActivityDTO("T2", "Project A", "Frontend UI", "Buat Slice", "Siti", "Medium", 6, 30, "Alice", LocalDate.now().plusDays(3), 0, 0));
         service.createTask(new ToDoActivityDTO("T3", "Project B", "Database Design", "Buat ERD", "Andi", "High", 5, 100, "Alice", LocalDate.now().plusDays(2), 0, 0));
 
+        //Menu
         while (true) {
             System.out.println("\n=================================");
             System.out.println("   TO DO LIST MANAGEMENT SYSTEM  ");
@@ -39,9 +41,11 @@ public class MainToDo {
             System.out.println("10. Keluar");
             System.out.print("Pilih menu (1-10): ");
 
+            //Scanner
             int menu = scanner.nextInt();
             scanner.nextLine();
 
+            //Menu Per Choice
             switch (menu) {
                 case 1:
                     System.out.print("Task ID: "); String id = scanner.nextLine();
